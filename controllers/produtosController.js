@@ -13,8 +13,8 @@ exports.listarProdutos = (req, res) => {
 
 // Criar um novo produto
 exports.criarProduto = (req, res) => {
-  const { nome, preco } = req.body;
-  db.query("INSERT INTO produtos (nome, preco) VALUES (?, ?)", [nome, preco], (err) => {
+  const { nome, descricao, preco } = req.body;
+  db.query("INSERT INTO produtos (nome, descricao, preco) VALUES (?, ?, ?)", [nome, descricao, preco], (err) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
@@ -26,8 +26,8 @@ exports.criarProduto = (req, res) => {
 // Atualizar um produto
 exports.atualizarProduto = (req, res) => {
   const { id } = req.params;
-  const { nome, preco } = req.body;
-  db.query("UPDATE produtos SET nome = ?, preco = ? WHERE id = ?", [nome, preco, id], (err) => {
+  const { nome, descricao, preco } = req.body;
+  db.query("UPDATE produtos SET nome = ?, descricao = ?, preco = ? WHERE id = ?", [nome, descricao, preco, id], (err) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
