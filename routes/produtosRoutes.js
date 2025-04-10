@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-// Import the produtosController to handle product-related operations
 const produtosController = require("../controllers/produtosController");
+const validaProduto = require("../middlewares/validaProdutos");
 
 router.get("/", produtosController.listarProdutos);
-router.post("/", produtosController.criarProduto);
-router.put("/:id", produtosController.atualizarProduto);
+router.post("/", validaProduto, produtosController.criarProduto);
+router.put("/:id", validaProduto, produtosController.atualizarProduto);
 router.delete("/:id", produtosController.deletarProduto);
 
 module.exports = router;
